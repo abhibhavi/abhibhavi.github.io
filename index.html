@@ -1,0 +1,103 @@
+<!-- Display the countdown timer in an element -->
+<head>
+    <style>
+        body {
+            max-width: 500px;
+            margin: auto;
+            display:flex; flex-direction:column; justify-content:center;
+            min-height:100vh;
+            font-family: Papyrus,fantasy;
+            font-weight: bolder;
+
+
+
+            background: rgb(110, 57, 75);
+            background: linear-gradient(90deg, rgba(110, 57, 75, 1) 13%, rgba(194, 161, 169, 1) 47%, rgba(28, 130, 199, 1) 94%);
+        }
+        .con1{
+            display: flex;
+            text-align: center;
+
+        }
+        #demo, #demo_1{
+            color: white;
+
+            font-size: 200%;
+        }
+        button{
+            background-color: #f44336;; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        #image-1,#image-2{
+            height: 50px;
+
+
+        }
+    </style>
+</head>
+<body>
+<h1>Abhishek & Bhavika</h1>
+<div class="con1">
+<div><img src="together.svg" alt="" id="image-1"></div>
+
+<div id="demo">
+</div>
+</div>
+<div class="con1">
+<div><img src="Last-met.svg" alt="" id="image-2"></div>
+<div id="demo_1"> </div>
+
+</div>
+<button id="reset-counter"> Reset Counter</button>
+
+<script>
+    // Set the date we're counting down to
+    var dateFirstMet = new Date("Dec 7, 2021 19:37:25").getTime();
+    let lastMet= new Date("Mar 11, 2022 14:00:00").getTime();
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance =  now-dateFirstMet ;
+        let button_reset= document.getElementById("reset-counter");
+        button_reset.addEventListener('click', ()=>{
+            lastMet=new Date().getTime();
+        })
+        var lastMet_distance=now-lastMet;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+        var days_l = Math.floor(lastMet_distance / (1000 * 60 * 60 * 24));
+        var hours_l = Math.floor((lastMet_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes_l = Math.floor((lastMet_distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds_l = Math.floor((lastMet_distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = "Together for: \n" +days + " days " + hours + " hours  "
+            + minutes + " minutes " + seconds + " seconds ";
+
+        document.getElementById("demo_1").innerHTML = "Last Met: " +days_l + " days " + hours_l + " hours  "
+            + minutes_l + " minutes " + seconds_l + " seconds ";
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+
+</body>
